@@ -78,7 +78,7 @@ const Chatbot = () => {
           options: ["Gym", "Pool", "Schools Nearby", "Others"],
         });
       } else {
-        alert("Please select a valid location: Delhi, Noida, Gurgaon, or Others.");
+        alert("Please select a valid location: Gurgaon or Others.");
         return;
       }
     } else if (newMessages.length === 10) {
@@ -246,16 +246,18 @@ const Chatbot = () => {
                       >
                         <div
                           className={`${
-                            message.type === "bot" ? "bg-gray-100" : "bg-blue-500 text-white"
-                          } rounded-lg p-4 max-w-xl text-sm`}
+                            message.type === "bot"
+                              ? "bg-gray-100"
+                              : "bg-gradient-to-r from-orange-500 via-yellow-500 to-pink-300 text-white"
+                          } rounded-lg p-4 max-w-xl text-sm shadow-md`}
                         >
                           {message.content}
-                          {message.options && (
+                          {message.type === "bot" && message.options && (
                             <div className="flex flex-wrap gap-2 mt-2">
                               {message.options.map((option, i) => (
                                 <button
                                   key={i}
-                                  className="bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded text-sm"
+                                  className="bg-gradient-to-r from-orange-500 via-yellow-500 to-pink-300 text-white px-4 py-2 rounded-full hover:opacity-80 text-sm shadow-md"
                                   onClick={() => handleOptionClick(option)}
                                 >
                                   {option}
@@ -269,7 +271,7 @@ const Chatbot = () => {
                   )}
                 </div>
               </div>
-              <div className="mt-auto flex relative">
+              <div className="flex items-center relative">
               <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
                   <img
                     src="./src/assets/rhai.png"
@@ -279,10 +281,10 @@ const Chatbot = () => {
                 </div>
                 <input
                   type="text"
-                  placeholder="Type your message..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleInputKeyDown}
+                  placeholder="Type your message here..."
                   className="w-full border-gray-300 rounded-lg pl-10 pr-12 focus:ring-red-500 focus:border-red-500"
                 />
                 <button
@@ -296,7 +298,6 @@ const Chatbot = () => {
           </div>
         </div>
       </main>
-
       <Footer />
     </div>
   );
